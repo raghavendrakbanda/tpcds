@@ -234,7 +234,7 @@ resource "azurerm_databricks_workspace" "Databricks" {
 
         Storage for the Synapse Workspace configuration data along with any test data for on-demand querying and ingestion.
 
-************************************************************************************************************************************************/
+
 
 // Azure Data Lake Storage Gen2: Storage for the Synapse Workspace configuration data and test data
 //   Azure: https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction
@@ -503,4 +503,5 @@ resource "azurerm_private_endpoint" "synapse-dev" {
     subresource_names              = [ "Dev" ]
     is_manual_connection           = false
   }
+************************************************************************************************************************************************/
 }
