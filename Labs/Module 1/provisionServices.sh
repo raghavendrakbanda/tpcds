@@ -19,10 +19,10 @@ if [ -z "$PREFIX" ]; then
 fi
 
 # Make sure this configuration script hasn't been executed already
-if [ -f "deploySynapse.complete" ]; then
-    echo "ERROR: It appears this configuration has already been completed." | tee -a serviceProvision.log
-    exit -1;
-fi
+#if [ -f "deploySynapse.complete" ]; then
+#    echo "ERROR: It appears this configuration has already been completed." | tee -a serviceProvision.log
+#    exit -1;
+#fi
 
 # Try and determine if we're executing from within the Azure Cloud Shell
 if [ ! "${AZUREPS_HOST_ENVIRONMENT}" = "cloud-shell/1.0" ]; then
@@ -47,7 +47,7 @@ azureUsername=$(az account show --query user.name --output tsv 2>&1)
 azureUsernameObjectId=$(az ad user show --id $azureUsername --query objectId --output tsv 2>&1)
 
 # Update Terraform Variables
-sed -i "s/REPLACE_SYNAPSE_AZURE_AD_ADMIN_UPN/${azureUsername}/g" Terraform/terraform.tfvars
+#sed -i "s/REPLACE_SYNAPSE_AZURE_AD_ADMIN_UPN/${azureUsername}/g" Terraform/terraform.tfvars
 
 # Add service name prefix to all service names
 sed -i "s/DEPLOY_PREFIX_NAME/${PREFIX}/g" Terraform/terraform.tfvars
