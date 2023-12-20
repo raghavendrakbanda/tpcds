@@ -63,25 +63,25 @@ resource "random_string" "suffix" {
 
 ************************************************************************************************************************************************/
 
-output "synapse_sql_pool_name" {
-  value = var.synapse_sql_pool_name
-}
+#output "synapse_sql_pool_name" {
+#  value = var.synapse_sql_pool_name
+#}
 
-output "synapse_sql_administrator_login" {
-  value = var.synapse_sql_administrator_login
-}
+#output "synapse_sql_administrator_login" {
+#  value = var.synapse_sql_administrator_login
+#}
 
-output "synapse_sql_administrator_login_password" {
-  value = var.synapse_sql_administrator_login_password
-}
+#output "synapse_sql_administrator_login_password" {
+#  value = var.synapse_sql_administrator_login_password
+#}
 
-output "synapse_analytics_workspace_name" {
-  value = var.synapse_workspace_name
-}
+#output "synapse_analytics_workspace_name" {
+#  value = var.synapse_workspace_name
+#}
 
-output "synapse_analytics_workspace_resource_group" {
-  value = var.resource_group_name
-}
+#output "synapse_analytics_workspace_resource_group" {
+#  value = var.resource_group_name
+#}
 
 output "datalake_name" {
   value = var.adls_storage_account
