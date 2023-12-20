@@ -158,18 +158,18 @@ data "azurerm_resources" "adls-dfs-privatelink-dns" {
 // Lookup the Private DNS Zone for Azure Synapse Analytics Workspace
 //   Azure: https://docs.microsoft.com/en-us/azure/dns/private-dns-privatednszone
 //   Terraform: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resources
-data "azurerm_resources" "synapse-dev-privatelink-dns" {
-  name = "privatelink.dev.azuresynapse.net"
-  type = "Microsoft.Network/privateDnsZones"
-}
+//data "azurerm_resources" "synapse-dev-privatelink-dns" {
+//  name = "privatelink.dev.azuresynapse.net"
+//  type = "Microsoft.Network/privateDnsZones"
+//}
 
 // Lookup the Private DNS Zone for Azure Synapse Analytics SQL
 //   Azure: https://docs.microsoft.com/en-us/azure/dns/private-dns-privatednszone
 //   Terraform: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resources
-data "azurerm_resources" "synapse-sql-privatelink-dns" {
-  name = "privatelink.sql.azuresynapse.net"
-  type = "Microsoft.Network/privateDnsZones"
-}
+//data "azurerm_resources" "synapse-sql-privatelink-dns" {
+//  name = "privatelink.sql.azuresynapse.net"
+//  type = "Microsoft.Network/privateDnsZones"
+//}
 
 
 /************************************************************************************************************************************************
@@ -254,23 +254,23 @@ resource "azurerm_storage_account" "datalake" {
 // Azure Data Lake Storage Gen2 Permissions: Give the synapse_azure_ad_admin_upn user/group permissions to Azure Data Lake Storage Gen2
 //   Azure: https://docs.microsoft.com/en-us/azure/synapse-analytics/security/how-to-grant-workspace-managed-identity-permissions
 //   Terraform: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment
-resource "azurerm_role_assignment" "adls-user-permissions" {
-  scope                = azurerm_storage_account.datalake.id
-  role_definition_name = "Storage Blob Data Contributor"
-  principal_id         = data.azuread_user.synapse_azure_ad_admin_object_id.id
+//resource "azurerm_role_assignment" "adls-user-permissions" {
+//  scope                = azurerm_storage_account.datalake.id
+//  role_definition_name = "Storage Blob Data Contributor"
+//  principal_id         = data.azuread_user.synapse_azure_ad_admin_object_id.id
 
-  depends_on = [ azurerm_storage_account.datalake ]
-}
+//  depends_on = [ azurerm_storage_account.datalake ]
+//}
 
 // Storage Container for the Synapse Workspace config data
 //   Azure: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction
 //   Terraform: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_data_lake_gen2_filesystem
-resource "azurerm_storage_data_lake_gen2_filesystem" "datalake-config" {
-  name               = "config"
-  storage_account_id = azurerm_storage_account.datalake.id
+//resource "azurerm_storage_data_lake_gen2_filesystem" "datalake-config" {
+//  name               = "config"
+//  storage_account_id = azurerm_storage_account.datalake.id
   
-  depends_on = [ azurerm_storage_account.datalake, azurerm_role_assignment.adls-user-permissions ]
-}
+//  depends_on = [ azurerm_storage_account.datalake, azurerm_role_assignment.adls-user-permissions ]
+//}
 
 // Storage Container for any data to ingest or query on-demand
 //   Azure: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction
@@ -336,18 +336,18 @@ resource "azurerm_private_endpoint" "adlspe-dfs" {
 // Storage Firewall: Give the Synapse Analytics Workspace network access to Azure Data Lake Storage Gen2 if Private Endpoints are enabled
 //   Azure: https://docs.microsoft.com/en-us/azure/storage/common/storage-network-security?tabs=azure-portal#grant-access-from-azure-resource-instances-preview
 //   Terraform: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules
-resource "azurerm_storage_account_network_rules" "firewall" {
-  count                = var.enable_private_endpoints == true ? 1 : 0
-  storage_account_id   = azurerm_storage_account.datalake.id
-  default_action       = "Deny"
-  bypass               = [ "None" ]
+//resource "azurerm_storage_account_network_rules" "firewall" {
+//  count                = var.enable_private_endpoints == true ? 1 : 0
+//  storage_account_id   = azurerm_storage_account.datalake.id
+//  default_action       = "Deny"
+//  bypass               = [ "None" ]
 
-  private_link_access { 
-    endpoint_resource_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourcegroups/${var.resource_group_name}/providers/Microsoft.Synapse/workspaces/*"
-    endpoint_tenant_id   = data.azurerm_client_config.current.tenant_id
- }
+//  private_link_access { 
+//    endpoint_resource_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourcegroups/${var.resource_group_name}/providers/Microsoft.Synapse/workspaces/*"
+//    endpoint_tenant_id   = data.azurerm_client_config.current.tenant_id
+// }
 
-  depends_on = [ azurerm_private_endpoint.adlspe-blob, azurerm_private_endpoint.adlspe-dfs ]
+//  depends_on = [ azurerm_private_endpoint.adlspe-blob, azurerm_private_endpoint.adlspe-dfs ]
 }
 
 /************************************************************************************************************************************************
