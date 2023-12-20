@@ -234,7 +234,7 @@ resource "azurerm_databricks_workspace" "Databricks" {
 
         Storage for the Synapse Workspace configuration data along with any test data for on-demand querying and ingestion.
 
-
+************************************************************************************************************************************************/
 
 // Azure Data Lake Storage Gen2: Storage for the Synapse Workspace configuration data and test data
 //   Azure: https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction
@@ -356,7 +356,7 @@ resource "azurerm_storage_account_network_rules" "firewall" {
 
         Create the Synapse Analytics Workspace along with a DWU1000 Dedicated SQL Pool for the Data Warehouse.
 
-************************************************************************************************************************************************/
+
 
 // Synapse Workspace
 //   Azure: https://docs.microsoft.com/en-us/azure/synapse-analytics/overview-what-is
