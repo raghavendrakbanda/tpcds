@@ -127,9 +127,9 @@ output "sp_name" {
 // Lookup the Azure AD Object ID of the Synapse Admin UPN
 //   Azure: https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory
 //   Terraform: https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/user
-data "azuread_user" "synapse_azure_ad_admin_object_id" {
-  user_principal_name = var.synapse_azure_ad_admin_upn
-}
+//data "azuread_user" "synapse_azure_ad_admin_object_id" {
+//  user_principal_name = var.synapse_azure_ad_admin_upn
+//}
 
 // Lookup the Virtual Network where the Private Endpoints will be created
 //   Azure: https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview
